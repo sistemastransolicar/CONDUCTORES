@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutograma</title>
+<style>
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2980b9;
+  --background-color: #f1f8ff;
+  --text-color: #2c3e50;
+  --border-color: #b0c4de;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 15px;
+  background-color: var(--background-color);
+  margin: 0;
+  min-height: 100vh;
+}
+
+h3 {
+  color: var(--text-color);
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+}
+form, 
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 1rem;
+}
+
+input[type="text"],
+input[type="submit"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px; /* Mínimo 16px para evitar zoom en iOS */
+}
+
+input[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--secondary-color);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 15px 0;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.download-button {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.download-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Media queries */
+@media screen and (min-width: 768px) {
+  body {
+    padding: 25px;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  input[type="text"],
+  input[type="submit"],
+  select {
+    padding: 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body {
+    padding: 10px;
+  }
+
+  form {
+    width: 100%;
+    padding: 10px;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  input[type="text"],
+  input[type="submit"],
+  select {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .checkbox-container {
+    margin: 10px 0;
+  }
+
+  .download-button {
+    padding: 12px 20px;
+  }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a1a1a;
+    --text-color: #ffffff;
+    --border-color: #444;
+  }
+
+  body {
+    color: var(--text-color);
+  }
+
+  input[type="text"],
+  select {
+    background-color: #333;
+    color: var(--text-color);
+  }
+
+  h3 {
+    color: var(--text-color);
+  }
+}
+    </style>
+  </head>
+  <body>
+    <h3>Rutograma</h3>
+    <br>
+    <form id="form" onsubmit="getPDF(event)">
+       <label for="nombre">Nombre Completo:</label>
+      <input type="text" for="nombre" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required>
+      
+      <label for="cedula">Cédula:</label>
+      <input type="text" for="cedula" id="cedula" name="cedula" placeholder="Ingrese su cédula" required>
+      
+      <label for="manifiesto">Manifiesto:</label>
+      <input type="text" for="manifiesto"  id="manifiesto" name="manifiesto" placeholder="Ingrese el número de manifiesto" required>
+
+      <label for="origen">Origen:</label>
+      <select id="origen" name="origen" required>
+      <option value="aguachica">Aguachica</option>
+      <option value="amaga">Amagá</option>
+      <option value="arauca">Arauca</option>
+      <option value="arjona">Arjona</option>
+      <option value="barrancabermeja">Barrancabermeja</option>
+      <option value="barranquilla">Barranquilla</option>
+      <option value="bello">Bello</option>
+      <option value="bogota">Bogotá D.C.</option>
+      <option value="bucaramanga">Bucaramanga</option>
+      <option value="buenaventura">Buenaventura</option>
+      <option value="cartagena">Cartagena</option>
+      <option value="cartago">Cartago</option>
+      <option value="caucasia">Caucasia</option>
+      <option value="cerete">Cereté</option>
+      <option value="cienaga de oro">Ciénaga de Oro</option>
+      <option value="cimitarra">Cimitarra</option>
+      <option value="corrales">Corrales</option>
+      <option value="cota">Cota</option>
+      <option value="cucunuba">Cucunubá</option>
+      <option value="cucuta">Cúcuta</option>
+      <option value="curiti">Curití</option>
+      <option value="curumani">Curumaní</option>
+      <option value="dibulla">Dibulla</option>
+      <option value="dosquebradas">Dosquebradas</option>
+      <option value="el zulia">El Zulia</option>
+      <option value="envigado">Envigado</option>
+      <option value="espinal">Espinal</option>
+      <option value="facatativa">Facatativá</option>
+      <option value="funza">Funza</option>
+      <option value="fusagasuga">Fusagasugá</option>
+      <option value="fusagasuga el triunfo boqueron">Fusagasugá El Triunfo Boquerón</option>
+      <option value="galapa">Galapa</option>
+      <option value="giron">Girón</option>
+      <option value="guachene cauca">Guachené Cauca</option>
+      <option value="guacheta">Guachetá</option>
+      <option value="guadalajara de buga">Guadalajara de Buga</option>
+      <option value="guarne">Guarne</option>
+      <option value="ibague">Ibagué</option>
+      <option value="itagui">Itagüí</option>
+      <option value="landazuri">Landázuri</option>
+      <option value="lebrija">Lebrija</option>
+      <option value="lenguazaque">Lenguazaque</option>
+      <option value="los patios">Los Patios</option>
+      <option value="maicao">Maicao</option>
+      <option value="malambo">Malambo</option>
+      <option value="manizales">Manizales</option>
+      <option value="monteria">Montería</option>
+      <option value="mosquera">Mosquera</option>
+      <option value="neiva">Neiva</option>
+      <option value="nemocon">Nemocón</option>
+      <option value="ocana">Ocaña</option>
+      <option value="palermo">Palermo</option>
+      <option value="palmar de varela">Palmar de Varela</option>
+      <option value="palmira">Palmira</option>
+      <option value="paz de rio">Paz de Río</option>
+      <option value="pereira">Pereira</option>
+      <option value="piedecuesta">Piedecuesta</option>
+      <option value="popayan">Popayán</option>
+      <option value="riohacha">Riohacha</option>
+      <option value="rionegro">Rionegro</option>
+      <option value="rivera">Rivera</option>
+      <option value="sabaneta">Sabaneta</option>
+      <option value="samaca">Samacá</option>
+      <option value="san cayetano">San Cayetano</option>
+      <option value="san faustino">San Faustino</option>
+      <option value="san gil">San Gil</option>
+      <option value="santa marta">Santa Marta</option>
+      <option value="santa rosa">Santa Rosa</option>
+      <option value="santa rosa del sur">Santa Rosa del Sur</option>
+      <option value="santiago de tolu">Santiago de Tolú</option>
+      <option value="saravena">Saravena</option>
+      <option value="sardinata">Sardinata</option>
+      <option value="sibate">Sibaté</option>
+      <option value="sitionuevo">Sitionuevo</option>
+      <option value="socha">Socha</option>
+      <option value="sogamoso">Sogamoso</option>
+      <option value="soledad">Soledad</option>
+      <option value="sonson">Sonsón</option>
+      <option value="sopo">Sopó</option>
+      <option value="sutatausa">Sutatausa</option>
+      <option value="tasco">Tasco</option>
+      <option value="tausa">Tausa</option>
+      <option value="tenjo">Tenjo</option>
+      <option value="tibu">Tibú</option>
+      <option value="tocancipa">Tocancipá</option>
+      <option value="topaga">Topagá</option>
+      <option value="tunja">Tunja</option>
+      <option value="turbaco">Turbaco</option>
+      <option value="uribia">Uribia</option>
+      <option value="valledupar">Valledupar</option>
+      <option value="villa del rosario">Villa del Rosario</option>
+      <option value="villavicencio">Villavicencio</option>
+      <option value="yopal">Yopal</option>
+      <option value="yumbo">Yumbo</option>
+      </select>
+      <br><br>
+
+      <label for="destino">Destino:</label>
+      <select id="destino" name="destino" required>
+        <option value="">Seleccione el destino </option>
+        <option value="aguachica">Aguachica</option>
+        <option value="amaga">Amagá</option>
+        <option value="arauca">Arauca</option>
+        <option value="arjona">Arjona</option>
+        <option value="barrancabermeja">Barrancabermeja</option>
+        <option value="barranquilla">Barranquilla</option>
+        <option value="bello">Bello</option>
+        <option value="bogota">Bogotá D.C.</option>
+        <option value="bucaramanga">Bucaramanga</option>
+        <option value="buenaventura">Buenaventura</option>
+        <option value="cartagena">Cartagena</option>
+        <option value="cartago">Cartago</option>
+        <option value="caucasia">Caucasia</option>
+        <option value="cerete">Cereté</option>
+        <option value="cienaga de oro">Ciénaga de Oro</option>
+        <option value="cimitarra">Cimitarra</option>
+        <option value="corrales">Corrales</option>
+        <option value="cota">Cota</option>
+        <option value="cucunuba">Cucunubá</option>
+        <option value="cucuta">Cúcuta</option>
+        <option value="curiti">Curití</option>
+        <option value="curumani">Curumaní</option>
+        <option value="dibulla">Dibulla</option>
+        <option value="dosquebradas">Dosquebradas</option>
+        <option value="el zulia">El Zulia</option>
+        <option value="envigado">Envigado</option>
+        <option value="espinal">Espinal</option>
+        <option value="facatativa">Facatativá</option>
+        <option value="funza">Funza</option>
+        <option value="fusagasuga">Fusagasugá</option>
+        <option value="fusagasuga el triunfo boqueron">Fusagasugá El Triunfo Boquerón</option>
+        <option value="galapa">Galapa</option>
+        <option value="giron">Girón</option>
+        <option value="guachene cauca">Guachené Cauca</option>
+        <option value="guacheta">Guachetá</option>
+        <option value="guadalajara de buga">Guadalajara de Buga</option>
+        <option value="guarne">Guarne</option>
+        <option value="ibague">Ibagué</option>
+        <option value="itagui">Itagüí</option>
+        <option value="landazuri">Landázuri</option>
+        <option value="lebrija">Lebrija</option>
+        <option value="lenguazaque">Lenguazaque</option>
+        <option value="los patios">Los Patios</option>
+        <option value="maicao">Maicao</option>
+        <option value="malambo">Malambo</option>
+        <option value="manizales">Manizales</option>
+        <option value="monteria">Montería</option>
+        <option value="mosquera">Mosquera</option>
+        <option value="neiva">Neiva</option>
+        <option value="nemocon">Nemocón</option>
+        <option value="ocana">Ocaña</option>
+        <option value="palermo">Palermo</option>
+        <option value="palmar de varela">Palmar de Varela</option>
+        <option value="palmira">Palmira</option>
+        <option value="paz de rio">Paz de Río</option>
+        <option value="pereira">Pereira</option>
+        <option value="piedecuesta">Piedecuesta</option>
+        <option value="popayan">Popayán</option>
+        <option value="riohacha">Riohacha</option>
+        <option value="rionegro">Rionegro</option>
+        <option value="rivera">Rivera</option>
+        <option value="sabaneta">Sabaneta</option>
+        <option value="samaca">Samacá</option>
+        <option value="san cayetano">San Cayetano</option>
+        <option value="san faustino">San Faustino</option>
+        <option value="san gil">San Gil</option>
+        <option value="santa marta">Santa Marta</option>
+        <option value="santa rosa">Santa Rosa</option>
+        <option value="santa rosa del sur">Santa Rosa del Sur</option>
+        <option value="santiago de tolu">Santiago de Tolú</option>
+        <option value="saravena">Saravena</option>
+        <option value="sardinata">Sardinata</option>
+        <option value="sibate">Sibaté</option>
+        <option value="sitionuevo">Sitionuevo</option>
+        <option value="socha">Socha</option>
+        <option value="sogamoso">Sogamoso</option>
+        <option value="soledad">Soledad</option>
+        <option value="sonson">Sonsón</option>
+        <option value="sopo">Sopó</option>
+        <option value="sutatausa">Sutatausa</option>
+        <option value="tasco">Tasco</option>
+        <option value="tausa">Tausa</option>
+        <option value="tenjo">Tenjo</option>
+        <option value="tibu">Tibú</option>
+        <option value="tocancipa">Tocancipá</option>
+        <option value="topaga">Topagá</option>
+        <option value="tunja">Tunja</option>
+        <option value="turbaco">Turbaco</option>
+        <option value="uribia">Uribia</option>
+        <option value="valledupar">Valledupar</option>
+        <option value="villa del rosario">Villa del Rosario</option>
+        <option value="villavicencio">Villavicencio</option>
+        <option value="yopal">Yopal</option>
+        <option value="yumbo">Yumbo</option>
+      </select>
+      <br><br>
+
+      <label for="agencia">Agencia:</label>
+      <select id="agencia" name="agencia" required>
+        <option value="">Seleccione la agencia</option>
+        <option value="barranquilla">Barranquilla</option>
+        <option value="bogota">Bogotá</option>
+        <option value="bucaramanga">Bucaramanga</option>
+        <option value="buenaventura">Buenaventura</option>
+        <option value="cartagena">Cartagena</option>
+        <option value="cucuta">Cúcuta</option>
+        <option value="duitama">Duitama</option>
+        <option value="medellin">Medellín</option>
+        <option value="santa_marta">Santa Marta</option>
+      </select>
+      <br><br>
+
+      <label for="acceptTerms">
+        <input type="checkbox" id="acceptTerms"> Acepto recibir el rutograma
+      </label><br><br>
+
+      <input type="submit" value="Buscar PDF">
+    </form>
+    <div id="result"></div>
+
+ <script>
+      function getPDF(event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById("nombre").value;
+        const cedula = document.getElementById("cedula").value;
+        const manifiesto = document.getElementById("manifiesto").value;
+        const origen = document.getElementById("origen").value;
+        const destino = document.getElementById("destino").value;
+        const agencia = document.getElementById("agencia").value;
+        const acceptTerms = document.getElementById("acceptTerms").checked;
+
+        // Verificar que todos los campos estén llenos
+        if (!nombre || !cedula || !manifiesto || !origen || !destino || !agencia) {
+          alert("Por favor, complete todos los campos antes de enviar.");
+          return;
+        }
+
+        if (!acceptTerms) {
+          alert("Por favor, acepta para continuar con la descarga.");
+          return;
+        }
+
+        console.log(`Solicitando PDF con los datos: 
+          Origen: ${origen}, Destino: ${destino}`);
+
+        google.script.run.withSuccessHandler(displayLink).fetchPDF(origen, destino, nombre, cedula, manifiesto, agencia);
+      }
+
+      function displayLink(link) {
+        const resultDiv = document.getElementById("result");
+        if (link) {
+          resultDiv.innerHTML = `<a href="${link}" target="_blank" class="download-button">Descargar PDF</a>`;
+        } else {
+          resultDiv.innerHTML = "Archivo no encontrado.";
+        }
+      }
+    </script>
+  </body>
+</html>

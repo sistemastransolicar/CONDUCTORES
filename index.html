@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspección Preoperacional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Inspección Preoperacional de Vehículo</h1>
+    
+    <form id="inspeccion-form">
+        <!-- Información básica -->
+        <section class="seccion-form">
+            <h2>Información General</h2>
+            <div class="campo">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+            </div>
+            <div class="campo">
+                <label for="placa">Placa del Vehículo:</label>
+                <input type="text" id="placa" name="placa" required>
+            </div>
+            <div class="campo">
+                <label for="conductor">Nombre del Conductor:</label>
+                <input type="text" id="conductor" name="conductor" required>
+            </div>
+        </section>
+
+        <!-- Lista de verificación -->
+        <section class="seccion-form">
+            <h2>Lista de Verificación</h2>
+            
+            <!-- Exterior del vehículo -->
+            <div class="categoria">
+                <h3>Exterior del Vehículo</h3>
+                <div class="item-check">
+                    <label>Luces delanteras:</label>
+                    <select name="luces_delanteras" required>
+                        <option value="">Seleccione...</option>
+                        <option value="bueno">Bueno</option>
+                        <option value="regular">Regular</option>
+                        <option value="malo">Malo</option>
+                    </select>
+                    <input type="text" placeholder="Observaciones" name="obs_luces_delanteras">
+                </div>
+                <!-- Añade más ítems según necesites -->
+            </div>
+
+            <!-- Niveles y fluidos -->
+            <div class="categoria">
+                <h3>Niveles y Fluidos</h3>
+                <div class="item-check">
+                    <label>Nivel de aceite:</label>
+                    <select name="nivel_aceite" required>
+                        <option value="">Seleccione...</option>
+                        <option value="bueno">Bueno</option>
+                        <option value="regular">Regular</option>
+                        <option value="malo">Malo</option>
+                    </select>
+                    <input type="text" placeholder="Observaciones" name="obs_nivel_aceite">
+                </div>
+                <!-- Añade más ítems según necesites -->
+            </div>
+        </section>
+
+        <!-- Observaciones generales -->
+        <section class="seccion-form">
+            <h2>Observaciones Generales</h2>
+            <textarea id="observaciones" name="observaciones" rows="4"></textarea>
+        </section>
+
+        <button type="submit">Generar Reporte PDF</button>
+    </form>
+
+
+</body>
+</html>
